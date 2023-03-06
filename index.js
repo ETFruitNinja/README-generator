@@ -1,10 +1,23 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+// generates license badge based on selected license
+function getLicenseBadge(license) {
+    if (license === 'MIT') {
+        return 'https://img.shields.io/badge/license-MIT-green'
+    } else if (license === 'APACHE 2.0') {
+        return 'https://img.shields.io/badge/license-APACHE%202.0-green'
+    } else if (license === 'GPL 3.0') {
+        return 'https://img.shields.io/badge/license-GPL%203.0-green';
+    } else if (license === 'BSD 3') {
+        return 'https://img.shields.io/badge/license-BSD$203-green'
+    }
+}
+
 // function to determine text content of README file
 const generateReadMe = ({title, description, installation, usage, contributing, tests, license, username, email}) => 
 `# ${title}
-![license badge](https://img.shields.io/github/license/etfruitninja/README-generator)
+![license badge](${getLicenseBadge(license)})
 
 ## Description
 
@@ -95,7 +108,7 @@ inquirer
   .then((data) => {
     const readMeContent = generateReadMe(data);
 
-    fs.writeFile('sample-README.md', readMeContent, (err) =>
+    fs.writeFile(`${data.title}-README.md`, readMeContent, (err) =>
       err ? console.log(err) : console.log('Success!')
     );
   });
