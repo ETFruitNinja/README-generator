@@ -56,6 +56,7 @@ ${tests}
 GitHub Profile: github.com/${username}\n
 Email: ${email}`;
 
+// inquirer: includes questions to ask to the user; use the responses to generate the README file
 inquirer
   .prompt([
     {
